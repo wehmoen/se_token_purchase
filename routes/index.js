@@ -27,7 +27,7 @@ router.get("/thank-you", (req, res) => {
 });
 
 router.get("/canceled", (req, res) => {
-    res.render("thankyou", {
+    res.render("canceled", {
         token: config.SE.symbol,
         price: config.SE.price_usd.toFixed(2),
         total: (config.SE.price_usd * config.SE.min_purchase).toFixed(2),
