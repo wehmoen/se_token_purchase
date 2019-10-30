@@ -4,7 +4,6 @@ const config = require("../config");
 const coinbase = require("../coinbase");
 /* GET home page. */
 router.get('/', function (req, res, next) {
-
     res.render('layout', {
         token: config.SE.symbol,
         price: config.SE.price_usd.toFixed(2),
