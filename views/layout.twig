@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">Quantity:</label>
-                        <input type="number" min="100" class="form-control" name="quantity" placeholder="" value="100"
+                        <input type="number" min="100" class="form-control" id="quantity" name="quantity" placeholder="" value="100"
                                required>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -80,6 +80,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
+<script>
+    const price_per_token = {{ price_plain }};
+    function updateTotal() {
+        $('#total').text((price_per_token * parseInt($('#quantity').val())).toFixed(2))
+    }
 
+    $(() => {
+        $('#quantity').on("change", updateTotal);
+        $('#quantity').on("keyup", updateTotal);
+    })
+</script>
 </body>
 </html>

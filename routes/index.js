@@ -7,6 +7,7 @@ router.get('/', function (req, res, next) {
     res.render('layout', {
         token: config.SE.symbol,
         price: config.SE.price_usd.toFixed(2),
+        price_plain: config.SE.price_usd,
         total: (config.SE.price_usd * config.SE.min_purchase).toFixed(2),
         min_purchase: config.SE.min_purchase,
         logo: config.SE.logo,
