@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Buy {{ token }} with Bitcoin, Ethereum and more crypto currencies.">
+    <meta name="author" content="@wehmoen">
+    <link rel="icon" href="{{ logo }}">
+
+    <title>Buy {{ token }} with Bitcoin</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4 rounded" src="{{ logo }}" alt="" width="72" height="72">
+        <h2>Buy {{ token }}</h2>
+        <p class="lead">
+            Enter the amount of {{ token }} you want to purchase as well as the steem account that should receive
+            the {{ token }}.
+            <br>You can optionally also set a memo.
+            <br>
+        <h4>1 {{ token }} costs ${{ price }} USD</h4>
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <form action="/checkout" method="post" class="needs-validation">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Quantity:</label>
+                        <input type="number" min="100" class="form-control" name="quantity" placeholder="" value="100"
+                               required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="username">Steem Account</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@</span>
+                            </div>
+                            <input type="text" class="form-control" name="receiver" placeholder="Username" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email">Memo <span class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" name="memo" placeholder="">
+                </div>
+
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout ($<span id="total">{{ total }}</span>USD) </button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; {{ ""|date("Y") }} {{contact.name}}</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="//steemit.com/@{{ contact.steem }}">Blog</a></li>
+            <li class="list-inline-item"><a href="mailto:{{ contact.email }}?subject={{ token }}%20Purchase">Contact</a></li>
+        </ul>
+    </footer>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
+
+</body>
+</html>
