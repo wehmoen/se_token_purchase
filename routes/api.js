@@ -16,12 +16,15 @@ router.post("/coinbase/webhook", (req, res) => {
   const signature = req.headers["x-cc-webhook-signature"];
   const bodyString = JSON.stringify(req.body);
 
-  const isVerified = coinbase.client.verifyWebhookSignature(signature, bodyString, coinbase.webhook.sharedSecret)
+  const isVerified = coinbase.client.verifyWebhookSignature(signature, bodyString, coinbase.webhook.sharedSecret);
 
   if (isVerified) {
+      console.log("> Verified Request:", bodyString)
     let meta = req.body.event.data.metadata;
     if (meta.receiver && meta.quantity) {
+        console.log("> Event Metadata includes Receiver and Quantity.")
       if (meta.secret === config.secret) {
+          console.log("> Event Secret is correct.")
         meta.memo = meta.memo + " -- " + req.body.event.data.code;
         console.log("----" + (new Date()).toString())
         steem.broadcast.send({
@@ -36,6 +39,8 @@ router.post("/coinbase/webhook", (req, res) => {
         });
       }
     }
+  } else {
+      console.log("> Invalid Webhook request.")
   }
   res.status(200).end()
 });
