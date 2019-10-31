@@ -13,6 +13,13 @@ router.get('/', function (req, res, next) {
 
             return config.SE.price_usd.toFixed(2);
         })(),
+        step: (() => {
+            if (config.SE.price_usd < 0.01) {
+                return Math.round(0.01 / config.SE.price_usd)
+            }
+
+            return 1;
+        })(),
         price_plain: config.SE.price_usd,
         total: (config.SE.price_usd * config.SE.min_purchase).toFixed(2),
         min_purchase: config.SE.min_purchase,
