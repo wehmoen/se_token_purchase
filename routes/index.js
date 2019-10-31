@@ -6,7 +6,13 @@ const coinbase = require("../coinbase");
 router.get('/', function (req, res, next) {
     res.render('layout', {
         token: config.SE.symbol,
-        price: config.SE.price_usd.toFixed(2),
+        price: (() => {
+            if (config.SE.price_usd < 0.01) {
+                return config.SE.price_usd.toString()
+            }
+
+            return config.SE.price_usd.toFixed(2);
+        })(),
         price_plain: config.SE.price_usd,
         total: (config.SE.price_usd * config.SE.min_purchase).toFixed(2),
         min_purchase: config.SE.min_purchase,
