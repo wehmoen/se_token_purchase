@@ -8,6 +8,7 @@ module.exports = {
         price_usd: 0.01,
         precision: 3,
         bank_account: 'null',
+        action: 'transfer', //issue or transfer
         active_wif: 'bank_account_private_active_wif',
         logo: "https://i.kym-cdn.com/photos/images/newsfeed/000/925/494/218.png_large",
         contact: {

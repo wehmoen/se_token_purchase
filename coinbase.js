@@ -23,12 +23,12 @@ module.exports = {
     buildSteemPayTX: (from, to, symbol, amount, memo) => {
         let json = [{
             "contractName": "tokens",
-            "contractAction": "transfer",
+            "contractAction": config.SE.action,
             "contractPayload": {
                 "symbol": symbol,
-                "to": to,
+                "to": "null",
                 "quantity": amount,
-                "memo": memo
+                "memo": "[from=" + to + "] " + memo
             }
         }];
 
