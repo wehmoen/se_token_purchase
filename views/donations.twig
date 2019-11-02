@@ -48,7 +48,7 @@
                             <td>{{ row.account }}</td>
                             <td>{{ row.memo|escape }}</td>
                             <td>
-                                <a class="btn btn-light text-dark btn-sm " href="//steem-engine.rocks/tx/{{ tx.txid }}" target="_blank">Show Transaction</a>
+                                <a class="btn btn-light text-dark btn-sm " href="//steem-engine.rocks/tx/{{ row.txid }}" target="_blank">Show Transaction</a>
                             </td>
                         </tr>
                     {% endfor %}
