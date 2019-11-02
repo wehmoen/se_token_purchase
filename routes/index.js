@@ -58,6 +58,13 @@ function getBeneficiary(from, memo) {
     }
     return from;
 }
+function clearMemo(memo) {
+    let match = memo.match(/\[from\s{0,}=\s{0,}@{0,1}(.*)\s{0,}\]/);
+    if (match !== null) {
+        return memo.replace(match[0], "").split("--")[0].trim()
+    }
+    return "";
+}
 
 async function getHistoryMin(account, symbol, offset, max, data) {
     let url = 'https://api.steem-engine.com/accounts/history?';
@@ -87,43 +94,24 @@ async function getHistory(account, symbol, offset = 0) {
 
     let relevantTX = [];
 
-    for (let i in transactions) {
-        let tx = transactions[i];
-        relevantTX.push({
-            account: tx.from,
-            quantity: parseFloat(tx.quantity),
-            receiver: getBeneficiary(tx.from, tx.memo || "")
-        })
-    }
-
-    let burnedSP = {};
-
     let totalBurn = 0;
 
-    for (let i in relevantTX) {
-        if (burnedSP.hasOwnProperty(relevantTX[i].receiver)) {
-            burnedSP[relevantTX[i].receiver].quantity += relevantTX[i].quantity
-        } else {
-            burnedSP[relevantTX[i].receiver] = {quantity: relevantTX[i].quantity}
-        }
-
-        totalBurn += relevantTX[i].quantity;
-    }
-
-    let dataArray = [];
-    for (let i in burnedSP) {
-        dataArray.push({
-            account: i,
-            quantity: burnedSP[i].quantity
+    for (let i in transactions) {
+        let tx = transactions[i];
+        totalBurn += parseFloat(tx.quantity);
+        relevantTX.push({
+            account: getBeneficiary(tx.from, tx.memo || ""),
+            quantity: parseFloat(tx.quantity),
+            memo: clearMemo(tx.memo)
         })
     }
 
-    dataArray = dataArray.sort((a, b) => {
-        return b.quantity - a.quantity
+    relevantTX = relevantTX.sort((a, b) => {
+        return (new Date(b.timestamp)) - (new Date(a.timestamp))
     });
 
     return {
-        data: dataArray,
+        data: relevantTX,
         totalBurn: totalBurn
     };
 

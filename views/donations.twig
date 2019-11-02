@@ -35,17 +35,17 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>#</th>
                         <th>Planted TREEs</th>
                         <th>Steem Username</th>
+                        <th>Memo</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for row in data.data %}
                         <tr>
-                            <td>{{ loop.index }}</td>
                             <td>{{ row.quantity }} TREEs</td>
                             <td>{{ row.account }}</td>
+                            <td>{{ row.memo|escape }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
