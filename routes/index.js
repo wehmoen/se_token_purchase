@@ -102,7 +102,8 @@ async function getHistory(account, symbol, offset = 0) {
         relevantTX.push({
             account: getBeneficiary(tx.from, tx.memo || ""),
             quantity: parseFloat(tx.quantity),
-            memo: clearMemo(tx.memo)
+            memo: clearMemo(tx.memo),
+            txid: tx.txid
         })
     }
 
@@ -119,7 +120,12 @@ async function getHistory(account, symbol, offset = 0) {
 
 router.get("/donations", async (req, res) => {
     let data = await getHistory("null", "TREE")
-    res.render("donations", {data, contact: config.SE.contact,logo: config.SE.logo,})
+    res.render("donations", {
+        data,
+        contact: config.SE.contact,
+        logo: config.SE.logo,
+        token: config.SE.symbol
+    })
 });
 
 router.post("/checkout", async (req, res) => {

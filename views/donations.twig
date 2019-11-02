@@ -38,6 +38,7 @@
                         <th>Planted TREEs</th>
                         <th>Steem Username</th>
                         <th>Memo</th>
+                        <td></td>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,9 @@
                             <td>{{ row.quantity }} TREEs</td>
                             <td>{{ row.account }}</td>
                             <td>{{ row.memo|escape }}</td>
+                            <td>
+                                <a href="//steem-engine.rocks/tx/{{ tx.txid }}" target="_blank">Show Transaction</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
